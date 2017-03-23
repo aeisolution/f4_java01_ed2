@@ -34,7 +34,7 @@ function aggiornaButtons(value) {
 }
 
 
-function caricaDati() {
+function caricaDati(alunni) {
     var table1 = document.getElementById('table1');
     var tbody = table1.getElementsByTagName('tbody')[0];
 
@@ -65,7 +65,7 @@ function ordinaDati(field) {
     });
 
     // aggiornare DOM tabella
-    caricaDati();
+    caricaDati(alunni);
 }
 
 
@@ -83,8 +83,64 @@ function nascondiMostra() {
 }
 
 function updateProgress() {
-    var value = document.frmProgress.progress.value;
+    var value = document.forms.frmProgress.valoreProgress.value;
 
     var pb = document.querySelector('.progress-bar');
     pb.style.width = value + '%';
+}
+
+
+function filtra(){
+    //1. Recupera stringa di filtro cognome
+    var filter = document.forms.frmFilter.cognome.value;
+
+    //2. Genera array filtrato per cognome
+    var alunniFilter = alunni.filter(function(alunno){
+        return filter == alunno.cognome.substr(0,filter.length);
+        /*
+        for(var i=0; i<filter.length; i++) {
+            if(filter[i] != alunno.cognome[i])
+                return false;
+        }
+        return true;
+        */
+    });
+
+    //3. aggiorna body della tabella
+    caricaDati(alunniFilter);
+}
+
+function extDatiLoad() {
+    var users = JSON.parse(this.response);
+
+    loadTable2(users);
+}
+
+function loadTable2(users) {
+    //1. intercettare tbody della tabella table2
+    var tb = document.getElementById('table2');
+    var tbody = tb.getElementsByTagName('tbody')[0];
+    tbody.innerHTML = '';
+
+    //2. ciclare array users e aggiungere tr con td
+    for(var i=0, len=users.length; i<len; i++) {
+        var row = document.createElement('tr');
+        row.innerHTML += '<td>' + users[i].id + '</td>';
+        row.innerHTML += '<td>' + users[i].name + '</td>';
+        row.innerHTML += '<td>' + users[i].email + '</td>';
+        row.innerHTML += '<td>' + users[i].username + '</td>';
+
+        tbody.appendChild(row);
+    }    
+}
+
+function caricaDatiEsterni() {
+    var req = new XMLHttpRequest();
+    req.onload = extDatiLoad;
+    req.open('GET', 'https://jsonplaceholder.typicode.com/users', true);
+    req.send();
+}
+
+function caricaDatiJQ() {
+  $.get('https://jsonplaceholder.typicode.com/users', loadTable2);
 }

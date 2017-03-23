@@ -8,7 +8,6 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
     <title>Theme Template for Bootstrap</title>
 
@@ -16,10 +15,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap theme -->
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -120,7 +115,16 @@
       <div class="row">
         <div class="col-md-6">
           <div class="col-md-12">
-            <button onclick="caricaDati()" type="button" class="btn btn-success">Carica dati</button>
+            <form class="form-inline" name="frmFilter">
+              <button onclick="caricaDati(alunni)" type="button" class="btn btn-success">Carica dati</button>
+
+              <div class="form-group">
+                <label for="filterCognome">Cognome</label>
+                <input type="text" class="form-control" name="cognome" id="filterCognome">
+              </div>
+              <button type="button" onclick="filtra()" class="btn btn-default">Filtra</button>
+            </form>
+
           </div>
           <table id="table1" class="table">
             <thead>
@@ -451,8 +455,13 @@
         <h1>Progress bars</h1>
       </div>
       <div>
-        <form name="frmProgress">
-          <input name="progress" type="number" value="0" onchange="updateProgress()">
+        <form name="frmProgress" class="form-inline">
+          <div class="form-group">
+            <label>Progress</label>
+            <input name="valoreProgress" class="form-control" type="number" 
+                    value="50" min="0" max="100">              
+          </div>
+          <button class="btn btn-primary" onclick="updateProgress()" type="button">Aggiorna</button>
         </form>
       </div>
       <div class="progress">
