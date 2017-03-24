@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Pagina AJAX</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            function caricaJQ() {
+                $.get('https://jsonplaceholder.typicode.com/users',
+                      function(data, status)  {
+                          $('#result').text(data);
+                      }
+                );
+            }
+
+            function carica() {
+                console.log('carica');
+                var req = new XMLHttpRequest();
+                req.onload = stampa;
+                req.open('GET',
+                          'https://jsonplaceholder.typicode.com/users',
+                          true);
+                req.send();
+            }
+
+            function stampa() {
+              console.log('stampa');
+              console.log(this.response);
+
+              document.getElementById('result')
+                      .innerHTML =  this.response;
+            }
+        </script>
+    </head>
+    <body>
+        <button onclick="carica();">Carica Dati</button>
+        <button onclick="caricaJQ();">Carica Dati jQuery</button>
+
+        <h1>Dati da sorgente esterna:</h1>
+        <div id="result">
+            
+        </div>
+    </body>
+</html>
