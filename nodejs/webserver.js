@@ -24,12 +24,12 @@ app.get('/',function(req, res){
 
 
 // Servizio webapi REST per allievi
-app.get('/allievi',function(req, res){
+app.get('/api/allievi',function(req, res){
     var results = allieviDAO.getAll();
     res.json(results);
 });
 
-app.get('/allievi/:id',function(req, res){
+app.get('/api/allievi/:id',function(req, res){
     var id = req.params.id || 0;
 
     var result = allieviDAO.get(id);
@@ -40,13 +40,22 @@ app.get('/allievi/:id',function(req, res){
     }
 });
 
-app.post('/allievi', function(req, res){
+app.post('/api/allievi', function(req, res){
     console.log("ricevuta richiesta di post");
     console.log("req.body");
     console.dir(req.body);
 
     var newAllievo = allieviDAO.post(req.body);
     res.status(201).json(newAllievo);
+});
+
+app.delete('/api/allievi/:id', function(req, res){
+    var id = req.params.id || 0;
+    if(allieviDAO.delete(id)) {
+        res.send("record cancellato");
+    } else {
+        res.send("record non trovato");
+    }    
 });
 
 

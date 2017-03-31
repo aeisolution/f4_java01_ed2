@@ -32,6 +32,15 @@ var dao = function() {
         return allievi[allievi.length-1];
     }
 
+    this.delete = function(id) {
+        for(var i=0; i<allievi.length; i++) {
+            if(allievi[i].id == id) {
+                allievi.splice(i, 1);
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 }
