@@ -27,7 +27,7 @@ function addRiga(elem) {
         strRiga += '<td>' + elem.username + '</td>';
         strRiga += '<td> \
                         <button class="btn btn-danger" onclick="delRecord(' + elem.id + ')"> \
-                            X \
+                            <i class="fa fa-times" aria-hidden="true"></i> \
                         </button> \
                     </td>';
         strRiga += '</tr>';
