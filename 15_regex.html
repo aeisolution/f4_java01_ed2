@@ -24,9 +24,18 @@
           <div class="col-xs-12">
             <h4 class="title text-primary">Dati Anagrafici</h4>
           </div>
+
+          <div class="row">
+            <button type="button" class="btn btn-default" onclick="validate()" >Salva</button>
+          </div>
+
+          <div class="col-xs-12" id="msgValidate">
+
+          </div>
+
           <div class="form-group col-lg-6">
               <label>Cognome</label>
-              <input type="text" name="cognome" class="form-control " required="">
+              <input type="text" name="cognome" class="form-control" required="">
           </div>
           <div class="form-group col-lg-6">
               <label>Nome</label>
@@ -78,11 +87,11 @@
           <hr class="clearfix divider">
           <div class="form-group col-md-12">
               <label>Note</label>
-              <textarea name="nome" class="form-control" rows="3"></textarea>
+              <textarea name="note" class="form-control" rows="3"></textarea>
           </div>
 
           <div class="form-group col-xs-12">
-            <button type="submit" class="btn btn-default" disabled="disabled">Salva</button>
+            <button type="button" class="btn btn-default" onclick="validate()" >Salva</button>
             <p class="help-block">Controllare campi inseriti e/o obbligatori</p>
           </div>
         </form>      
@@ -92,5 +101,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/regex.js"></script>
+
   </body>
 </html>
